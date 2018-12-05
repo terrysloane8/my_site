@@ -1,4 +1,5 @@
 import datetime
+import sqlite3
 
 from tenders.parsers.abstractParser import AbstractParser, TenderIsExpired
 
@@ -61,5 +62,14 @@ class Parser(AbstractParser):
         on_delete = False
         if created < '2018-11-28':
             raise TenderIsExpired()
+        conn = sqlite3.connect('db.sqlite3')
+        cursor = conn.cursor()
+        cursor.execute('select * from tenders_tender order by id desc')
+        res = cursor.fetchall()
+        conn.close()
+        if len(res) != 0:
+            res = res[0][1]
+            if url == res:
+                raise TenderIsExpired()
         self.create_tender(url, description, customer, _sum, created, deadline, loaded, on_delete)
 

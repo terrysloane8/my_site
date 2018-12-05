@@ -63,7 +63,7 @@ class AbstractParser(Thread):
     def create_tender(self, url, description, customer, bid_sum, created, deadline, loaded, on_delete):
         conn = sqlite3.connect('db.sqlite3')
         cursor = conn.cursor()
-        cursor.execute('select id from tenders_tender order by id desc')
+        cursor.execute('select id from tenders_tender order by id')
         result = cursor.fetchall()
         if len(result) == 0:
             _id = 1
@@ -73,3 +73,4 @@ class AbstractParser(Thread):
         text = text % (str(_id), url, description, customer, str(bid_sum), created, deadline, loaded, str(on_delete))
         cursor.execute(text)
         conn.commit()
+        conn.close()
