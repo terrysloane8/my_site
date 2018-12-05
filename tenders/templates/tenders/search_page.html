@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" http-equiv="Refresh" content="5">
+    <title>Title</title>
+</head>
+<body>
+{% if not finish %}
+Поиск еще идет. Найдено тендеров: {{ result }}
+{% endif %}
+{% if finish %}
+Поиск закончен. Найдено тендеров: {{ result }}
+<form action="/tenders/tenders_list"><button>Результаты</button></form>
+{% endif %}
+</body>
+</html>

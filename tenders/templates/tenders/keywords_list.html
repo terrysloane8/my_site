@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/tenders/search" method="post">{% csrf_token %}
+<table border="1">
+    <tr>
+        <td>Слово для поиска</td>
+    </tr>
+    {% for keyword in keywords %}
+    <tr>
+        <td>{{ keyword.word }}</td>
+        <td><input name="{{ keyword.word }}" type="checkbox" checked></td>
+    </tr>
+    {% endfor %}
+</table>
+    <button type="submit">Начать поиск</button>
+</form>
+</body>
+</html>

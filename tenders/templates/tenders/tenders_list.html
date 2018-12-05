@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/tenders/tenders_choose" method="post">{% csrf_token %}
+    <table border="1">
+        <tr>
+            <td>Ссылка</td>
+            <td>Описание</td>
+            <td>Заказчик</td>
+            <td>Сумма заявки</td>
+        </tr>
+        {% for tender in tenders %}
+        <tr>
+            <td><a href="{{ tender.url }}">ссылка</a></td>
+            <td>{{ tender.description }}</td>
+            <td>{{ tender.customer }}</td>
+            <td>{{ tender.bid_sum }}</td>
+            <td><input name="{{ tender.id }}" type="checkbox"></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <button type="submit">Удалить неотмеченные</button>
+</form>
+</body>
+</html>
